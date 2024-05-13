@@ -27,7 +27,7 @@ hide_channel = """
 
 
 async def render_page(id, secure_hash, is_admin=False, html='', playlist='', database='', route='', redirect_url='', msg='', chat_id=''):
-    theme = (await db.get_variable('THEME')).lower()
+    theme = (await db.get_variable('THEME'))
     tpath = ospath.join('bot', 'server', 'template')
     if route == 'login':
         async with aiopen(ospath.join(tpath, 'login.html'), 'r') as f:
