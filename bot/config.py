@@ -8,7 +8,9 @@ class Telegram:
     API_ID = int(getenv("API_ID"))
     API_HASH = getenv("API_HASH")
     BOT_TOKEN = getenv("BOT_TOKEN")
-    PORT = int(getenv("PORT", "8080"))
+    MULTI_TOKEN1 = getenv("MULTI_TOKEN1")
+    
+    PORT = int(getenv("PORT", "8180"))
     BASE_URL = getenv("BASE_URL").rstrip('/')
     DATABASE_URL = getenv("DATABASE_URL")
     AUTH_CHANNEL = [channel.strip()
