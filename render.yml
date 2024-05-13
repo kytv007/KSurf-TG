@@ -1,0 +1,5 @@
+services:
+  - name: web
+    type: web
+    buildCommand: docker build -t my-bot-image .
+    startCommand: docker run -d -p 8080:8080 my-bot-image
