@@ -1,31 +1,15 @@
 from asyncio import gather, create_task
-from bot.helper.database import Database
 from bot.telegram import StreamBot
-import os
-
-db = Database()
-
+from bot.config import Telegram
 
 
 async def get_chats():
-    channel = os.getenv('AUTH_CHANNEL')
-    if channel:
-        chat = await StreamBot.get_chat(int(channel))
-        return {"chat-id": chat.id, "title": chat.title or chat.first_name, "type": chat.type.name}
-    else:
-        # Handle the case where AUTH_CHANNEL is not set or empty
-        return None
-
-#async def get_chats():
-    #channels = await db.get_variable('AUTH_CHANNEL')
-    #AUTH_CHANNEL = [channel.strip()
-                    #for channel in channels.split(",")]
-    #return [{"chat-id": chat.id, "title": chat.title or chat.first_name, "type": chat.type.name} for chat in await gather(*[create_task(StreamBot.get_chat(int(channel_id))) for channel_id in AUTH_CHANNEL])]
+    return [{"chat-id": chat.id, "title": chat.title or chat.first_name, "type": chat.type.name} for chat in await gather(*[create_task(StreamBot.get_chat(int(channel_id))) for channel_id in Telegram.AUTH_CHANNEL])]
 
 
 async def posts_chat(channels):
     phtml = """
-            <div class="col channel-card">
+            <div class="col">
                 <a href="/channel/{cid}">
                     <div class="card profile-card text-white bg-primary mb-2">
                     
