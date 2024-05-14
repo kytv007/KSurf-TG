@@ -4,6 +4,7 @@ from logging import getLogger, FileHandler, StreamHandler, INFO, ERROR, basicCon
 from os import getenv
 from uvloop import install
 from pymongo import MongoClient
+import os
 
 install()
 load_dotenv("config.env", override=True)
@@ -21,7 +22,9 @@ StartTime = time()
 
 __version__ = "1.2.4"
 
-bot_id = getenv('BOT_TOKEN').split(":", 1)[0]
+bot_token = os.getenv('BOT_TOKEN')
+bot_id = bot_token.split(":", 1)[0]
+#bot_id = getenv('BOT_TOKEN').split(":", 1)[0]
 database_url = getenv('DATABASE_URL')
 
 if database_url:
