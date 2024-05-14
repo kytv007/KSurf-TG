@@ -7,7 +7,7 @@ db = Database()
 
 
 
-async def get_chat():
+async def get_chats():
     channel = os.getenv('AUTH_CHANNEL')
     if channel:
         chat = await StreamBot.get_chat(int(channel))
