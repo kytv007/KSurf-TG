@@ -9,6 +9,8 @@ from bot.helper.utils import get_readable_file_size
 from bot.server.file_properties import get_file_ids
 from bot.telegram import StreamBot
 db = Database()
+import os
+import asyncio
 
 
 admin_block = """
@@ -27,7 +29,7 @@ hide_channel = """
 
 
 async def render_page(id, secure_hash, is_admin=False, html='', playlist='', database='', route='', redirect_url='', msg='', chat_id=''):
-    theme = (await db.get_variable('THEME')).lower()
+    theme = await asyncio.get_event_loop().run_in_executor(None, lambda: os.getenv("THEME", "quartz").lower())
     tpath = ospath.join('bot', 'server', 'template')
     if route == 'login':
         async with aiopen(ospath.join(tpath, 'login.html'), 'r') as f:
